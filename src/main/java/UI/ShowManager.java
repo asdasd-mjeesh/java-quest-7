@@ -1,7 +1,6 @@
 package UI;
 
-import UI.util.CollectionFilter;
-import domain.store.product.Product;
+import domain.store.Product;
 import domain.store.Store;
 
 import java.time.LocalDate;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowManager {
-    private Store store;
+    private final Store store;
 
     public ShowManager(Store store) {
         this.store = store;
@@ -24,9 +23,7 @@ public class ShowManager {
 
     //a
     public void showProductsWithNameAndSortedByShelfLife(String name) {
-        var toShow =
-                CollectionFilter.getAllSortedByShelfLife(
-                        CollectionFilter.getAllWithName(name, store.getProducts()));
+        var toShow = store.getAllSortedByShelfLifeWithName(name);
 
         System.out.println("__________\n" +
                 "Все продукты с названием \"" + name + "\", \n" +
@@ -41,9 +38,7 @@ public class ShowManager {
 
     //b
     public void showProductsWithNameAndCostALess(String name, int maxCost) {
-        var toShow =
-                CollectionFilter.getAllWithPriceALess(maxCost,
-                        CollectionFilter.getAllWithName(name, store.getProducts()));
+        var toShow = store.getProductsWithNameAndCostALess(name, maxCost);
 
         System.out.println("__________\n" +
                 "Все продукты с названием \"" + name + "\", \n" +
@@ -58,8 +53,7 @@ public class ShowManager {
 
     //c
     public void showProductWithShelfLifeAlong(LocalDate minShelfLife) {
-        var toShow =
-                CollectionFilter.getAllWithShelfLifeALong(minShelfLife, store.getProducts());
+        var toShow = store.getAllWithShelfLifeALong(minShelfLife);
 
         System.out.println("__________\n" +
                 "Все продукты со сроком годности, \n" +
@@ -74,8 +68,7 @@ public class ShowManager {
 
     //d
     public void showAllProductsSortedByPrice() {
-        var toShow =
-                CollectionFilter.getAllSortedByPrice(store.getProducts());
+        var toShow = store.getAllSortedByPrice();
 
         System.out.println("__________\n" +
                 "Все продукты, отсортированные по параметру\n" +
@@ -94,7 +87,7 @@ public class ShowManager {
         System.out.println("_________\n" +
                 "Все производители:");
 
-        for (String s : producers.keySet()) {
+        for (String s : producers) {
             System.out.println("-> " + s);
         }
 
@@ -103,7 +96,7 @@ public class ShowManager {
 
     //f
     public void showAllProducersWithThemProducts() {
-        var producers = store.getProducers();
+        var producers = store.getProducersWithThemProducts();
         ArrayList<Product> mapValue;
 
         System.out.println("__________");

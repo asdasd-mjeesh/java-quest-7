@@ -11,12 +11,12 @@ public final class DateCreator {
     private DateCreator() {  }
 
     public static LocalDate createDate(int year, int mount, int day) {
-        LocalDate date = null;
+        LocalDate date;
         try {
             date = LocalDate.of(year, mount, day);
+            return date;
         } catch (DateTimeException e) {
             date = LocalDate.of(DEFAULT_YEAR, DEFAULT_MOUNT, DEFAULT_DAY);
-        } finally {
             return date;
         }
     }

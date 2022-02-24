@@ -1,6 +1,6 @@
 package data.util;
 
-import domain.store.product.Product;
+import domain.store.Product;
 
 import java.io.*;
 import java.util.ArrayList;

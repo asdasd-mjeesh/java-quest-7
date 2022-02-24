@@ -1,22 +1,20 @@
-package domain.store.product;
+package domain.store;
 
-import domain.store.product.interfaces.HavingAnShelfLife;
-import domain.store.product.interfaces.Named;
-import domain.store.product.interfaces.Pricey;
-
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Product implements Named, Pricey, HavingAnShelfLife, Serializable {
+public class Product implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1337;
     private static int countProducts = 0;
     private final int id;
-    private String name;
-    private String producer;
-    private int cost;
-    private LocalDate shelfLife;
-    private int count;
-    private int price;
+    private final String name;
+    private final String producer;
+    private final int cost;
+    private final LocalDate shelfLife;
+    private final int count;
+    private final int price;
 
     public Product(String name, String producer, int cost, LocalDate shelfLife, int count) {
         countProducts++;
@@ -29,7 +27,6 @@ public class Product implements Named, Pricey, HavingAnShelfLife, Serializable {
         this.price = cost * count;
     }
 
-    @Override
     public String toString() {
         return new String
                 ("id: " + id + "\n" +
@@ -49,7 +46,6 @@ public class Product implements Named, Pricey, HavingAnShelfLife, Serializable {
         return id;
     }
 
-    @Override
     public String getName() {
         return name;
     }
@@ -58,22 +54,18 @@ public class Product implements Named, Pricey, HavingAnShelfLife, Serializable {
         return producer;
     }
 
-    @Override
     public int getCost() {
         return cost;
     }
 
-    @Override
     public LocalDate getShelfLife() {
         return shelfLife;
     }
 
-    @Override
     public int getCount() {
         return count;
     }
 
-    @Override
     public int getPrice() {
         return price;
     }

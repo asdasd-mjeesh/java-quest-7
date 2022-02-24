@@ -3,6 +3,7 @@ package UI;
 import domain.store.Store;
 
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Example {
@@ -30,46 +31,56 @@ public class Example {
 
         while (true) {
             showManager.showMenu();
+            System.out.print("CHOICE:\t");
             choice = in.nextLine();
 
-            switch (choice)
-            {
-                case "a":
-                    nameFilter = in.nextLine();
-                    showManager.showProductsWithNameAndSortedByShelfLife(nameFilter);
-                    choice = "0";
-                    break;
-                case "b":
-                    nameFilter = in.nextLine();
-                    costFilter = in.nextInt();
-                    showManager.showProductsWithNameAndCostALess(nameFilter, costFilter);
-                    choice = "0";
-                    break;
-                case "c":
-                    dateFilter = executeManager.createDate();
-                    showManager.showProductWithShelfLifeAlong(dateFilter);
-                    break;
-                case "d":
-                    showManager.showAllProductsSortedByPrice();
-                    break;
-                case "e":
-                    showManager.showAllProducers();
-                    break;
-                case "f":
-                    showManager.showAllProducersWithThemProducts();
-                    break;
-                case "1":
-                    showManager.showAll();
-                    break;
-                case "2":
-                    executeManager.addProduct();
-                    break;
-                case "3":
-                    int id = in.nextInt();
-                    executeManager.deleteProduct(id);
-                    break;
-                default:
-                    break;
+            try {
+                switch (choice)
+                {
+                    case "a":
+                        System.out.print("name:\t");
+                        nameFilter = in.nextLine();
+                        showManager.showProductsWithNameAndSortedByShelfLife(nameFilter);
+                        choice = "0";
+                        break;
+                    case "b":
+                        System.out.print("name:\t");
+                        nameFilter = in.nextLine();
+                        System.out.print("\nmax cost:\t");
+                        costFilter = in.nextInt();
+                        showManager.showProductsWithNameAndCostALess(nameFilter, costFilter);
+                        choice = "0";
+                        break;
+                    case "c":
+                        dateFilter = executeManager.createDate();
+                        showManager.showProductWithShelfLifeAlong(dateFilter);
+                        break;
+                    case "d":
+                        showManager.showAllProductsSortedByPrice();
+                        break;
+                    case "e":
+                        showManager.showAllProducers();
+                        break;
+                    case "f":
+                        showManager.showAllProducersWithThemProducts();
+                        break;
+                    case "1":
+                        showManager.showAll();
+                        break;
+                    case "2":
+                        executeManager.addProduct();
+                        break;
+                    case "3":
+                        System.out.print("id:\t");
+                        int id = in.nextInt();
+                        executeManager.deleteProduct(id);
+                        break;
+                    default:
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                choice = "";
+                System.out.println("input invalid value");
             }
         }
     }

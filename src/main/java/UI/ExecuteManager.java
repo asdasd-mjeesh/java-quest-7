@@ -4,11 +4,12 @@ import UI.interfaces.CreatingADate;
 import domain.store.Store;
 
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ExecuteManager implements CreatingADate {
-    private Store store;
-    private Scanner in;
+    private final Store store;
+    private final Scanner in;
 
     public ExecuteManager(Store store) {
         this.store = store;
@@ -33,7 +34,7 @@ public class ExecuteManager implements CreatingADate {
             in.nextLine();
 
             store.addProduct(name, producer, cost, shelfLife, count);
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.err.println("ашыпка ввода");
         }
     }
