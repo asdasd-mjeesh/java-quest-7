@@ -34,7 +34,8 @@ public class Product implements Serializable {
                         "producer: " + producer + "\n" +
                         "cost: " + cost + "\n" +
                         "shelf life: " + shelfLife + "\n" +
-                        "count: " + count + "\n"
+                        "count: " + count + "\n" +
+                        "price: " + price + "\n"
                 );
     }
 
