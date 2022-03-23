@@ -1,11 +1,9 @@
 package domain.store;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-public abstract class ProductFilter {
+public final class ProductFilter {
     private final List<Product> products;
 
     public ProductFilter(List<Product> products) {
@@ -16,18 +14,18 @@ public abstract class ProductFilter {
         return products;
     }
 
-    // a
-    public List<Product> getAllSortedByShelfLifeWithName(String name) {
-        List<Product> result = new ArrayList<>(getAllWithName(name));
-        result.retainAll(getAllSortedByShelfLife());
+    // supported method for a
+    public List<Product> getAllSortedByShelfLife() {
+        List<Product> result = new ArrayList<>(products);
         result.sort(Comparator.comparing(Product::getShelfLife));
 
         return result;
     }
 
-    // supported method for a
-    public List<Product> getAllSortedByShelfLife() {
-        List<Product> result = new ArrayList<>(products);
+    // a
+    public List<Product> getAllSortedByShelfLifeWithName(String name) {
+        List<Product> result = new ArrayList<>(getAllWithName(name));
+        result.retainAll(getAllSortedByShelfLife());
         result.sort(Comparator.comparing(Product::getShelfLife));
 
         return result;
@@ -79,12 +77,13 @@ public abstract class ProductFilter {
 
     // d
     public List<Product> getAllSortedByPrice() {
-        List<Product> result = new ArrayList<>(products);
-        result.sort(new PriceComparator());
+        List<Product> result = products;
+        Collections.sort(result);
 
         return result;
     }
 
+    /*
     // comparator for d
     private static class PriceComparator implements Comparator<Product> {
         @Override
@@ -109,5 +108,5 @@ public abstract class ProductFilter {
             }
             return 0;
         }
-    }
+    }*/
 }
